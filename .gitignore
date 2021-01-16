@@ -4,3 +4,4 @@ dist
 
 # Files
 !.gitkeep
+package-lock.json
