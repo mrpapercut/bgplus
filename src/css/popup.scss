@@ -1,0 +1,17 @@
+body#popup {
+    width: 200px;
+    background: #333;
+    color: #fff;
+    float: left;
+    margin: 0;
+
+    h1 {
+        text-align: center;
+        margin-top: 0;
+    }
+
+    label {
+        clear: both;
+        float: left;
+    }
+}
