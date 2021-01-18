@@ -4,7 +4,9 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 module.exports = function(env, argv) {
     return {
         entry: {
-            main: './src/BGPlus.js'
+            main: './src/BGPlus.js',
+            popup: './src/popup.js',
+            background: './src/background.js'
         },
         mode: env && env.production ? 'production' : 'development',
         devtool: env && env.production ? false : 'source-map',

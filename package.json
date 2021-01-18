@@ -15,7 +15,7 @@
     "webpack-cli": "^4.3.1"
   },
   "scripts": {
-    "build": "webpack --env.production",
+    "build": "webpack --env=production",
     "watch": "webpack --watch --color --progress"
   }
 }
