@@ -15,14 +15,14 @@ class MarkUnreadTopics {
 
     _log(msg) {
         if (this.debug === true) console.log(msg);
-    } 
+    }
 
     async initialize() {
         /**
          * Forum posts
          * id: topic_id
          * test if newer: comment_id
-         * 
+         *
          * Others
          * id: hash of url
          * test if newer: timestamp
@@ -30,7 +30,7 @@ class MarkUnreadTopics {
 		try {
         	await this.addCurrentPage();
 		} catch(_) {
-			
+
 		} finally {
     		this.checkVisitedPages();
 		}
@@ -64,7 +64,7 @@ class MarkUnreadTopics {
 
         return (hval >>> 0).toString(16).padStart(0, 8);
     }
-    
+
     parsePageURL() {
     	const {hash, search} = document.location;
 	    const searchParts = search.split('&');
@@ -72,32 +72,32 @@ class MarkUnreadTopics {
 	        hash: null,
 	        search: []
 	    };
-	    
+
 	    if (hash.length > 0) {
 	        parsed.hash = parseInt(hash.replace(/^#c/, ''), 10);
 	    }
-	    
+
 	    searchParts.forEach(part => {
 	        if (part.indexOf('?') === 0) {
 	            part = part.replace(/^\?/, '');
 	        }
-	        
+
 	        let [key, val] = part.split('=');
-	        
+
 	        parsed.search[key] = val;
 	    });
-	    
+
 	    return parsed;
     }
-    
+
     isLastPageInThread() {
     	const pages = [...document.querySelectorAll('#budgetnieuws .titel span b')];
     	const currentPage = parseInt(pages[0].innerText, 10);
     	const totalPages = parseInt(pages[1].innerText.replace(/[^0-9]+/g, ''), 10);
-    	
+
     	return currentPage === totalPages;
     }
-    
+
     getLastComment() {
     	const lastCommentElement = [...document.querySelectorAll('.gamereactie')].pop();
     	return parseInt(lastCommentElement.querySelector('a').getAttribute('name').replace(/^c/, ''), 10);
@@ -107,14 +107,14 @@ class MarkUnreadTopics {
     	return new Promise((resolve, reject) => {
 	        if (document.location.pathname === '/forum.php') {
 	            const parsedURL = this.parsePageURL();
-	            
+
 	            // Not on thread page (like forum overview page)
 	            if (!parsedURL.search.hasOwnProperty('topic_id')) reject();
-	            
+
 	        	if (this.isLastPageInThread()) {
 	        		this._log('last page in thread, adding last comment');
 	        		const comment_id = this.getLastComment();
-		
+
 		            this._addOrUpdatePage({
 		                id: parsedURL.search.topic_id,
 		                last: comment_id
@@ -148,17 +148,17 @@ class MarkUnreadTopics {
 
     getRows() {
     	if (document.location.pathname === '/') {
-    	    return this._getHomepageRows();	
+    	    return this._getHomepageRows();
     	} else if (/page=laatsteforumreacties$/.test(document.location.href)) {
             return this._getOverviewpageRows();
         } else {
             return this._getSidebarRows();
         }
     }
-    
+
     _getHomepageRows() {
     	const rows = [...document.querySelectorAll('#laatste-forum')[0].querySelectorAll('.itemrow')].slice(0, 9);
-    	
+
     	return rows.map(r => {
             const [, day, month, hour, minute] = r.querySelector('.date').innerHTML.match(/(\d{2})\/(\d{2})\s(\d{2}):(\d{2})/);
             const ts = +new Date(`2020-${month}-${day} ${hour}:${minute}:00`);
@@ -175,6 +175,8 @@ class MarkUnreadTopics {
     }
 
     _getSidebarRows() {
+        if (document.querySelectorAll('ul.laatstegames').length === 0) return [];
+
         const rows = [...document.querySelectorAll('ul.laatstegames')[0].querySelectorAll('.itemrow')].slice(0, 30);
 
         return rows.map(r => {

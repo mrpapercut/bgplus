@@ -7,7 +7,7 @@ import {getStorage} from './util/storage';
 
 const manifestJson = chrome.runtime.getManifest();
 
-require('./css/main.scss');
+// require('./css/main.scss');
 
 class BGPlus {
     constructor() {

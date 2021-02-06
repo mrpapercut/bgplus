@@ -1,12 +1,13 @@
 const path = require('path');
-const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 module.exports = function(env, argv) {
     return {
         entry: {
             main: './src/BGPlus.js',
             popup: './src/popup.js',
-            background: './src/background.js'
+            background: './src/background.js',
+            mainCSS: './src/css/main.scss',
+            darkmodeCSS: './src/css/darkmode.scss'
         },
         mode: env && env.production ? 'production' : 'development',
         devtool: env && env.production ? false : 'source-map',
@@ -24,22 +25,25 @@ module.exports = function(env, argv) {
                 }
             }, {
                 test: /\.scss$/,
-                use: [
-                    MiniCssExtractPlugin.loader,
-                    {
-                        loader: 'css-loader',
-                        options: {
-                            sourceMap: true
-                        }
-                    },
-                    {
-                        loader: 'sass-loader',
-                        options: {
-                            sourceMap: true,
-                            implementation: require('sass')
-                        }
+                use: [{
+                    loader: 'file-loader',
+                    options: {
+                        name: '[name].css'
                     }
-                ]
+                }, {
+                    loader: 'extract-loader'
+                }, {
+                    loader: 'css-loader',
+                    options: {
+                        sourceMap: env && env.production
+                    }
+                }, {
+                    loader: 'sass-loader',
+                    options: {
+                        sourceMap: env && env.production,
+                        implementation: require('sass')
+                    }
+                }]
             }, {
                 test: /\.(woff2|ttf|png|jpg|gif|jpeg)$/,
                 use: {
@@ -52,9 +56,6 @@ module.exports = function(env, argv) {
         },
         performance: {
             hints: false
-        },
-        plugins: [
-            new MiniCssExtractPlugin()
-        ]
+        }
     };
 };

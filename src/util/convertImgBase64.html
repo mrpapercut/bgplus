@@ -1,0 +1,18 @@
+<!doctype html>
+<html>
+<body>
+<input type="file" id="upload">
+<textarea id="output"></textarea>
+<script>
+const inp = document.getElementById('upload');
+const out = document.getElementById('output');
+inp.addEventListener('change', e => {
+    const file = e.target.files[0];
+    const reader = new FileReader();
+
+    reader.onloadend = () => output.value = reader.result;
+    reader.readAsDataURL(file);
+});
+</script>
+</body>
+</html>

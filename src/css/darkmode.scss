@@ -1,125 +1,24 @@
-/* BG Darkmode */
 :root {
-	color-scheme: dark;
+    color-scheme: dark;
 }
 
-@media (prefers-color-scheme: dark) {
-	/* Generic */
-	body.darkmode {
-		background: #121212;
-		color: #cdcdcd;
-		
-		a, a:link {
-			color: #efefef;
-		}
-		
-		img {
-			filter: brightness(.8) contrast(1.2);
-		}
-		
-		.fa {
-			color: #efefef;
-		}
-		
-		/* Layout */
-		#header {
-			background: #333;
-		    border-radius: 10px 10px 0 0;
-		}
+$imgPrefix: 'https://github.com/mrpapercut/bgdarkmode/raw/main';
 
-		#content {
-			background: #333;
-			border-color: transparent;
-		}
-
-		#footer {
-			background: #333;
-		}
-
-		.itemrow {
-			background: none !important;
-			border-color: #555 !important;
-		}
-
-		.avatar a {
-			background: none;
-			border-color: transparent;
-		}
-
-		#game-formulier-content {
-			#game-reactie-form {
-				input {
-					background: #333;
-					color: #fff;
-					border: 1px solid #888;
-					border-radius: 3px;
-					cursor: pointer;
-				}
-			}
-
-			#game-reactie-submit {
-				background-position-y: 0;
-
-				&:hover {
-					background-position-y: -35px;
-				}
-			}
-		}
-		
-		/* Everything below uses addedIdentifiableClasses and don't need to override existing rules */
-		/* Layout */
-		.whitespaceAboveFooter {
-			display: none;
-		}
-
-		/* Images */
-		
-		
-		/* Forum */
-		/** Comments - header **/
-		.userOnlineImg,
-		.userOfflineImg {
-			filter: opacity(0);
-			position: relative;
-			content: ' ';
-		}
-		
-		.commentUsername {
-			position: relative;
-		}
-		
-		.commentUsername:before {
-			width: 8px;
-			height: 8px;
-			content: '';
-			position: absolute;
-			left: -10px;
-			top: 3px;
-			border-radius: 50%;
-		}
-		
-		.commentUsernameOnline:before {
-			background: #319d3f;
-		}
-		
-		.commentUsernameOffline:before {
-			background: #f00;
-		}
-		
-		/** Comments - quote **/
-		.commentQuoteWrapper {
-			margin: 0;
-		}
-		
-		.commentQuote {
-			background: #222 !important;
-			padding: 10px;
-		}
-		
-		/** Comments - signature **/
-		.commentSignature {
-			color: #909090 !important;
-		}
-	}	
+body.darkmode {
+    @import 'darkmode/mixins';
+    @import 'darkmode/colors';
+    @import 'darkmode/generic';
+    @import 'darkmode/layout';
+    @import 'darkmode/comments';
+    @import 'darkmode/gameinfo';
+    @import 'darkmode/userprofile';
+    @import 'darkmode/shopsurvey';
+    @import 'darkmode/forum';
+    @import 'darkmode/googlesearch';
+    @import 'darkmode/memberlist';
+    @import 'darkmode/prijsdoorgeven';
+    @import 'darkmode/customclasses';
+    @import 'darkmode/gamereview';
+    @import 'darkmode/emojis';
+    @import 'darkmode/colortheme';
 }
-/* End BG Darkmode */

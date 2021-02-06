@@ -1,0 +1,40 @@
+.whitespaceAboveFooter {
+    display: none;
+}
+
+/* Comments - User online/offline indicator */
+.commentUsername {
+    position: relative;
+    margin-left: 10px;
+}
+
+.commentUsername:before {
+    width: 8px;
+    height: 8px;
+    content: '';
+    position: absolute;
+    left: -10px;
+    top: 3px;
+    border-radius: 50%;
+}
+
+.commentUsernameOnline:before {
+    background: $userOnline;
+}
+
+.commentUsernameOffline:before {
+    background: $userOffline;
+}
+
+/** Comments - quote **/
+.commentQuoteWrapper,
+.quote1 {
+    margin: 0;
+    background: none !important;
+}
+
+.commentQuote,
+.quote2 {
+    background: $backgroundInput !important;
+    padding: 10px;
+}
