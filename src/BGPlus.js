@@ -1,6 +1,7 @@
 import MarkUnreadTopics from './modules/MarkUnreadTopics';
 import IndividualConsoleIcons from './modules/IndividualConsoleIcons';
 import Darkmode from './modules/Darkmode';
+import IgnoreUsers from './modules/IgnoreUsers';
 
 import addIdentifiableClasses from './util/addIdentifiableClasses';
 import {getStorage} from './util/storage';
@@ -21,7 +22,7 @@ class BGPlus {
     }
 
     async initialize() {
-        addIdentifiableClasses();
+        // addIdentifiableClasses();
 
         await this.getSettings();
         await this.initializeModules();
@@ -39,10 +40,10 @@ class BGPlus {
         if (typeof MarkUnreadTopics === 'function') {
             const storedSetting = this.settings.find(({setting, value}) => setting === 'markUnreadTopics');
             if (storedSetting && storedSetting.value === true) {
-                this.modules['markUnreadTopics'] = new MarkUnreadTopics();    
+                this.modules['markUnreadTopics'] = new MarkUnreadTopics();
             }
         }
-        
+
         if (typeof IndividualConsoleIcons === 'function') {
             const storedSetting = this.settings.find(({setting, value}) => setting === 'individualConsoleIcons');
             if (storedSetting && storedSetting.value === true) {
@@ -54,6 +55,13 @@ class BGPlus {
             const storedSetting = this.settings.find(({setting, value}) => setting === 'darkmode');
             if (storedSetting && storedSetting.value === true) {
                 this.modules['darkmode'] = new Darkmode();
+            }
+        }
+
+        if (typeof IgnoreUsers === 'function') {
+            const storedSetting = this.settings.find(({setting, value}) => setting === 'ignoreUsers');
+            if (storedSetting && storedSetting.value === true) {
+                this.modules['ignoreUsers'] = new IgnoreUsers();
             }
         }
 

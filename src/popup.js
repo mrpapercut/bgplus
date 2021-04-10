@@ -8,7 +8,8 @@ class BGPlusPopup {
         this.settingsElements = [
             'markUnreadTopics',
             'individualConsoleIcons',
-            'darkmode'
+            'darkmode',
+            'ignoreUsers'
         ];
         this.settingsObject = [];
 
@@ -31,7 +32,7 @@ class BGPlusPopup {
             }
 
             this.processSettings();
-            
+
             this.addListeners();
         });
 
