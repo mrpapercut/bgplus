@@ -6,9 +6,18 @@ class Darkmode {
 	async initialize() {
         document.body.classList.add('darkmode');
 
-        // Get color-specific
+        // Get color-specific for Budgetgaming.nl
         ['rood', 'paars', 'groen', 'blauw', 'donkergrijs', 'lichtgrijs'].forEach(color => {
             const existingStylesheet = document.querySelector(`link[href^="/css/${color}.css"]`);
+            if (existingStylesheet) {
+                document.body.classList.add(`darkmode-${color}`);
+                existingStylesheet.parentElement.removeChild(existingStylesheet);
+            }
+        });
+
+        // Get color-specific for Budgetspelen.nl
+        ['rood', 'paars', 'groen', 'blauw', 'donkergrijs', 'lichtgrijs'].forEach(color => {
+            const existingStylesheet = document.querySelector(`link[href^="https://www.budgetspelen.nl/css/${color}.css"]`);
             if (existingStylesheet) {
                 document.body.classList.add(`darkmode-${color}`);
                 existingStylesheet.parentElement.removeChild(existingStylesheet);
