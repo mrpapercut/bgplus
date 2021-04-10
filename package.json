@@ -18,6 +18,5 @@
   "scripts": {
     "build": "webpack --env=production",
     "watch": "webpack --watch --color --progress"
-  },
-  "dependencies": {}
+  }
 }

@@ -8,7 +8,10 @@
     "content_scripts": [{
         "js": ["dist/main.js"],
         "css": ["dist/main.css"],
-        "matches": ["https://www.budgetgaming.nl/*"]
+        "matches": [
+            "https://www.budgetgaming.nl/*",
+            "https://www.budgetspelen.nl/*"
+        ]
     }],
     "page_action": {
         "default_popup": "popup.html",
